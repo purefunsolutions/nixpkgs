@@ -22,20 +22,15 @@ let
 
 in {
   release = name: (buildUpstreamOpenRAEngine rec {
-    version = "20190314";
+    version = "20210321";
     rev = "${name}-${version}";
     sha256 = "15pvn5cx3g0nzbrgpsfz8dngad5wkzp5dz25ydzn8bmxafiijvcr";
   } name);
 
-  playtest = name: (buildUpstreamOpenRAEngine rec {
-    version = "20190302";
-    rev = "${name}-${version}";
-    sha256 = "1vqvfk2p2lpk3m0d3rpvj34i8cmk3mfc7w4cn4llqd9zp4kk9pya";
-  } name);
-
+  # bleed currently points to same version as release
   bleed = buildUpstreamOpenRAEngine {
-    version = "6e364cd";
-    rev = "6e364cdbee5445b9c0696b8c25b45742136dcdcb";
-    sha256 = "0vn97al72hw047frjblsr230yrddwgvzgk2fx3vs8vfrhlm179vn";
+    version = "b733b10";
+    rev = "b733b10f27e1cb4a00789148e005cc296dacfd0e";
+    sha256 = "15pvn5cx3g0nzbrgpsfz8dngad5wkzp5dz25ydzn8bmxafiijvcr";
   };
 }

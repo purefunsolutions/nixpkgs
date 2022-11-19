@@ -33,8 +33,14 @@ let
   buildOpenRASet = f: args: builtins.mapAttrs (name: value: if builtins.isFunction value then value name else value) (f ({
     inherit (pkgs) fetchFromGitHub;
     postFetch = ''
-      sed -i 's/curl/curl --insecure/g' $out/thirdparty/{fetch-thirdparty-deps,noget}.sh
-      $out/thirdparty/fetch-thirdparty-deps.sh
+      # thirdparty-directory does not exist from engine release-20210321
+      # onwards, however some mods might rely on older engines
+      test -f $out/thirdparty/fetch-thirdparty-deps.sh &&
+        sed -i 's/curl/curl --insecure/g' $out/thirdparty/fetch-thirdparty-deps.sh
+      test -f $out/thirdparty/noget.sh &&
+        sed -i 's/curl/curl --insecure/g' $out/thirdparty/noget.sh
+      test -x $out/thirdparty/fetch-thirdparty-deps.sh &&
+        $out/thirdparty/fetch-thirdparty-deps.sh
     '';
   } // args));
 
